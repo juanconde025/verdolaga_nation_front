@@ -1,21 +1,124 @@
-body {
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
-  
-  h1 {
-    color: #008f39;
-  }
-  .error {
-    color: red;
-    font-size: 14px;
-  }
-  
-  button:disabled {
-    background-color: grey;
-    cursor: not-allowed;
-  }
-  
+/* Estilos generales */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor principal en dos columnas */
+.auth-container {
+  display: flex;
+  width: 100vw; /* Reduce el ancho para mejor separación */
+  height: 100vh;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Sección de imagen */
+.auth-image {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #2D6A4F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0.9;
+  padding: 20px;
+}
+
+/* Sección de formulario */
+.auth-form {
+  flex: 1.2; /* Un poco más ancho que la imagen */
+  background: #ffffff;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Título */
+.auth-form h2 {
+  color: #2D6A4F;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+}
+
+/* Formulario con mejor distribución */
+.auth-form form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas */
+  gap: 25px 40px; /* Espaciado entre los elementos */
+}
+
+/* Inputs y textarea */
+.auth-form input, 
+.auth-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Asegurar que ciertos campos ocupen toda la fila */
+.auth-form textarea,
+.auth-form input[name="photo"],
+.auth-form button,
+.auth-form p {
+  grid-column: span 2;
+}
+
+/* Botón */
+.auth-form button {
+  width: 100%;
+  padding: 14px;
+  background-color: #2D6A4F;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-form button:hover {
+  background-color: #1b5232;
+}
+
+/* Link de login */
+.auth-form p {
+  text-align: center;
+}
+
+.auth-form a {
+  color: #6A994E;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-form a:hover {
+  text-decoration: underline;
+}
+
+/* Errores */
+.error {
+  color: red;
+  font-size: 14px;
+  grid-column: span 2;
+  text-align: center;
+}
