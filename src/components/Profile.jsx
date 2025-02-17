@@ -2,65 +2,55 @@ import { useEffect, useState } from "react";
 import { getUserProfile, getUserPosts } from "../services/api";
 import Cookies from "js-cookie";
 import "../styles/main.css";
+import Post from "./Post";
 
 function Profile() {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
-  const [loadingProfile, setLoadingProfile] = useState(true);
-  const [loadingPosts, setLoadingPosts] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    if (!token) {
-      console.error("No hay token, redirigir a login");
-      return;
-    }
-    
-    const fetchData = async () => {
+    const fetchProfile = async () => {
+      const token = Cookies.get("token");
+      if (!token) {
+        setError("No hay token, redirigiendo a login...");
+        setLoading(false);
+        return; 
+      }
+
       try {
-        const userData = await getUserProfile();
+        const userData = await getUserProfile(token); 
         setUser(userData);
-        setLoadingProfile(false);
-        
-        const userPosts = await getUserPosts(userData.id);
+
+        const userPosts = await getUserPosts(userData.id, token);  
         setPosts(userPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
-        setLoadingPosts(false);
       } catch (error) {
+        setError("Error al cargar los datos. Inténtalo de nuevo.");
         console.error("Error cargando perfil o publicaciones", error);
-        setLoadingProfile(false);
-        setLoadingPosts(false);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchData();
-  }, []);
+
+    fetchProfile();
+  }, []); 
+
+  if (loading) return <p>Cargando perfil...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="profile-container">
-      {loadingProfile ? (
-        <p>Cargando perfil...</p>
-      ) : user ? (
-        <>
-          <h2>{user.username}</h2>
-          <p>{user.bio}</p>
-          <h3>Publicaciones</h3>
-          {loadingPosts ? (
-            <p>Cargando publicaciones...</p>
-          ) : posts.length > 0 ? (
-            <ul className="post-list">
-              {posts.map(post => (
-                <li key={post.id} className="post-item">
-                  <h4>{post.title}</h4>
-                  <p>{post.content}</p>
-                  <small>{new Date(post.createdAt).toLocaleString()}</small>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No hay publicaciones aún.</p>
-          )}
-        </>
+      <h2>{user.username}</h2>
+      <p>{user.bio || "Sin biografía."}</p>
+
+      <h3>Publicaciones</h3>
+      {posts.length > 0 ? (
+        <ul className="post-list">
+          {posts.map((post) => <Post key={post.id} post={post} />)}  {/* Aquí se usa el componente 'Post' */}
+        </ul>
       ) : (
-        <p>Error cargando perfil.</p>
+        <p>No hay publicaciones aún.</p>
       )}
     </div>
   );

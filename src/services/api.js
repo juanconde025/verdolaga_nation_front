@@ -35,7 +35,7 @@ export const getUserProfile = async () => {
 
 export const getUserPosts = async (userId) => {
   const token = Cookies.get('token');
-  const response = await api.get(`/publications/${userId}`, {
+  const response = await api.get(`/publications/${userId}`, { 
     headers: { Authorization: `Bearer ${token}` }
   });
   return response.data;

@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "../styles/main.css";
 
 function Post() {
-  const [formData, setFormData] = useState({ title: "", content: "" });
+  const [formData, setFormData] = useState({ title: "", content: "", image: "" }); // Añadí un campo de imagen por si lo necesitas
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(""); // Para manejar errores
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,12 +16,14 @@ function Post() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError(""); // Reseteamos el error al intentar publicar
     try {
-      await createPost(formData);
+      await createPost(formData);  // Llamada a la API para crear el post
       alert("Post creado con éxito");
-      setFormData({ title: "", content: "" }); // Limpiar formulario
+      setFormData({ title: "", content: "", image: "" }); // Limpiar formulario
       navigate("/home"); // Redirigir al feed
     } catch (error) {
+      setError("Ocurrió un error al crear el post. Inténtalo de nuevo."); // Mensaje de error
       console.error("Error al crear el post", error);
     } finally {
       setLoading(false);
@@ -30,10 +33,33 @@ function Post() {
   return (
     <div className="page-container">
       <h2>Nuevo Post</h2>
+      {error && <p className="error-message">{error}</p>} {/* Mensaje de error */}
       <form className="post-form" onSubmit={handleSubmit}>
-        <input type="text" name="title" placeholder="Título" value={formData.title} onChange={handleChange} required />
-        <textarea name="content" placeholder="Escribe aquí..." value={formData.content} onChange={handleChange} required></textarea>
-        <button type="submit" disabled={loading}>{loading ? "Publicando..." : "Publicar"}</button>
+        <input
+          type="text"
+          name="title"
+          placeholder="Título"
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="content"
+          placeholder="Escribe aquí..."
+          value={formData.content}
+          onChange={handleChange}
+          required
+        ></textarea>
+        <input
+          type="text"
+          name="image"
+          placeholder="URL de la imagen (opcional)"
+          value={formData.image}
+          onChange={handleChange}
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? "Publicando..." : "Publicar"}
+        </button>
       </form>
     </div>
   );
