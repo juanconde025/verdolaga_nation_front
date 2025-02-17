@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 const api = axios.create({
   baseURL: 'http://localhost:8080',
   headers: { 'Content-Type': 'application/json' },
-  withCredentials: true // Asegura que se envían cookies si es necesario
+  withCredentials: true 
 });
 
 export const registerUser = async (userData) => {
@@ -17,27 +17,41 @@ export const loginUser = async (credentials) => {
   return response.data;
 };
 
-export const getPosts = async () => {
-  const response = await api.get('/posts');
+export const getFeedPosts = async () => {
+  const token = Cookies.get('token');
+  const response = await api.get('/publications', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
   return response.data;
 };
 
 export const getUserProfile = async () => {
   const token = Cookies.get('token');
-  const response = await api.get('/users/profile', {
+  const response = await api.get('/users', {
     headers: { Authorization: `Bearer ${token}` }
   });
   return response.data;
 };
 
 export const getUserPosts = async (userId) => {
-  const response = await api.get(`/users/${userId}/posts`);
+  const token = Cookies.get('token');
+  const response = await api.get(`/publications/${userId}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
   return response.data;
 };
 
 export const createPost = async (postData) => {
   const token = Cookies.get('token');
-  const response = await api.post('/posts', postData, {
+  const response = await api.post('/publications', postData, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+};
+
+export const getNotifications = async () => {
+  const token = Cookies.get('token');
+  const response = await api.get('/notifications', { // Removido userId ya que no estaba definido
     headers: { Authorization: `Bearer ${token}` }
   });
   return response.data;
