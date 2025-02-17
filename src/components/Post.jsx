@@ -6,7 +6,7 @@ import "../styles/main.css";
 function Post() {
   const [formData, setFormData] = useState({ title: "", content: "", image: "" }); // Añadí un campo de imagen por si lo necesitas
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(""); // Para manejar errores
+  const [error, setError] = useState(""); 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -16,12 +16,12 @@ function Post() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(""); // Reseteamos el error al intentar publicar
+    setError("");
     try {
-      await createPost(formData);  // Llamada a la API para crear el post
+      await createPost(formData);  
       alert("Post creado con éxito");
-      setFormData({ title: "", content: "", image: "" }); // Limpiar formulario
-      navigate("/home"); // Redirigir al feed
+      setFormData({ title: "", content: "", image: "" }); 
+      navigate("/home"); 
     } catch (error) {
       setError("Ocurrió un error al crear el post. Inténtalo de nuevo."); // Mensaje de error
       console.error("Error al crear el post", error);

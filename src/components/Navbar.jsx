@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
-// Asegúrate de que el componente esté definido y exportado
 const Navbar = () => {
   const navigate = useNavigate();
 
@@ -24,5 +23,4 @@ const Navbar = () => {
   );
 };
 
-// Asegúrate de exportar el componente
 export default Navbar;

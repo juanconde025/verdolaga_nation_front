@@ -16,14 +16,14 @@ function Profile() {
       if (!token) {
         setError("No hay token, redirigiendo a login...");
         setLoading(false);
-        return; 
+        return;
       }
 
       try {
-        const userData = await getUserProfile(token); 
+        const userData = await getUserProfile();  // No es necesario pasar el token aquí
         setUser(userData);
 
-        const userPosts = await getUserPosts(userData.id, token);  
+        const userPosts = await getUserPosts(userData.id);  // Aquí se pasa el userData.id
         setPosts(userPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
       } catch (error) {
         setError("Error al cargar los datos. Inténtalo de nuevo.");
@@ -34,7 +34,7 @@ function Profile() {
     };
 
     fetchProfile();
-  }, []); 
+  }, []);  
 
   if (loading) return <p>Cargando perfil...</p>;
   if (error) return <p>{error}</p>;
@@ -47,7 +47,7 @@ function Profile() {
       <h3>Publicaciones</h3>
       {posts.length > 0 ? (
         <ul className="post-list">
-          {posts.map((post) => <Post key={post.id} post={post} />)}  {/* Aquí se usa el componente 'Post' */}
+          {posts.map((post) => <Post key={post.id} post={post} />)}
         </ul>
       ) : (
         <p>No hay publicaciones aún.</p>

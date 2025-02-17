@@ -32,10 +32,11 @@ export const getUserProfile = async () => {
   });
   return response.data;
 };
+juanconde025
 
 export const getUserPosts = async (userId) => {
   const token = Cookies.get('token');
-  const response = await api.get(`/publications/${userId}`, { 
+  const response = await api.get(`/publications/publications-user/${userId}`, { 
     headers: { Authorization: `Bearer ${token}` }
   });
   return response.data;
@@ -51,7 +52,7 @@ export const createPost = async (postData) => {
 
 export const getNotifications = async () => {
   const token = Cookies.get('token');
-  const response = await api.get('/notifications', { // Removido userId ya que no estaba definido
+  const response = await api.get('/notifications', {
     headers: { Authorization: `Bearer ${token}` }
   });
   return response.data;
