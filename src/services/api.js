@@ -32,7 +32,6 @@ export const getUserProfile = async () => {
   });
   return response.data;
 };
-juanconde025
 
 export const getUserPosts = async (userId) => {
   const token = Cookies.get('token');
