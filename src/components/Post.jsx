@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { createPost } from "../services/api";
+import { useNavigate } from "react-router-dom";
 import "../styles/main.css";
 
 function Post() {
   const [formData, setFormData] = useState({ title: "", content: "" });
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,6 +18,8 @@ function Post() {
     try {
       await createPost(formData);
       alert("Post creado con éxito");
+      setFormData({ title: "", content: "" }); // Limpiar formulario
+      navigate("/home"); // Redirigir al feed
     } catch (error) {
       console.error("Error al crear el post", error);
     } finally {

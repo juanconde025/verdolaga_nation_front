@@ -74,7 +74,7 @@ function Register() {
       </div>
 
       {/* Sección de imagen */}
-      <div className="auth-image" style={{ backgroundImage: "url('src\images\Hinchada.jpg')" }}>
+      <div className="auth-image" style={{ backgroundImage: "url('src/images/Hinchada.jpg')" }}>
         <p>Unete a la comunidad Verdolaga!</p>
       </div>
     </div>

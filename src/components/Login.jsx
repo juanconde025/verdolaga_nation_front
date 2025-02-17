@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { loginUser } from "../services/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function Login() {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -19,6 +21,8 @@ function Login() {
     try {
       const response = await loginUser(credentials);
       alert(`Bienvenido, ${response.username}!`);
+      Cookies.set("token", response.token, { expires: 1});
+      navigate("/home");
     } catch (err) {
       setError("Error al iniciar sesión. Verifica tus credenciales.");
     } finally {
@@ -29,7 +33,7 @@ function Login() {
   return (
     <div className="auth-container">
       {/* Sección de imagen */}
-      <div className="auth-image" style={{ backgroundImage: "url('src\images\Campeones.jpg')" }}>
+      <div className="auth-image" style={{ backgroundImage: "url('src/images/Campeones.jpg')" }}>
         <p>Bienvenido de nuevo Verdolaga!</p>
       </div>
 
