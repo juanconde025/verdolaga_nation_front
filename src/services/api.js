@@ -37,11 +37,14 @@ export const getUserProfile = async () => {
   return response.data;
 };
 
-// Obtener publicaciones de un usuario específico
-export const getUserPosts = async () => {
+// Obtener publicaciones de un usuario específico usando su ID
+export const getUserPosts = async (userId) => {  // Acepta el ID como parámetro
+  if (!userId) {
+    throw new Error("No se recibió un userId válido.");
+  }
+
   const token = Cookies.get('token');
-  const userId = Cookies.get('userId'); // Obtener el userId desde las cookies
-  const response = await api.get(`/publications/publications-user/${userId}`, { // Usar el userId en la URL
+  const response = await api.get(`/publications/publications-user/${userId}`, { 
     headers: { Authorization: `Bearer ${token}` }
   });
   return response.data;
@@ -59,8 +62,8 @@ export const createPost = async (postData) => {
 // Obtener notificaciones
 export const getNotifications = async () => {
   const token = Cookies.get('token');
-  const userId = Cookies.get('userId'); // Obtener el userId desde las cookies
-  const response = await api.get(`/notifications/user/${userId}`, { // Usar el userId en la URL
+  const userId = Cookies.get('userId'); 
+  const response = await api.get(`/notifications/user/${userId}`, { 
     headers: { Authorization: `Bearer ${token}` }
   });
   return response.data;

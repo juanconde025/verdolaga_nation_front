@@ -29,7 +29,7 @@ function Notifications() {
         <ul className="notification-list">
           {notifications.map((notif) => (
             <li key={notif.id} className="notification-item">
-              <p>{notif.message}</p>
+              <p>{notif.content}</p> {/* Ahora usa content en lugar de message */}
               <small>{new Date(notif.createdAt).toLocaleString()}</small>
             </li>
           ))}

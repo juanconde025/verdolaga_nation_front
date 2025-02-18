@@ -15,7 +15,6 @@ const Navbar = () => {
       <div className="nav-links">
         <Link to="/home">Home</Link>
         <Link to="/profile">Perfil</Link>
-        <Link to="/post">Crear Post</Link>
         <Link to="/notifications">Notificaciones</Link>
         <button onClick={handleLogout}>Cerrar Sesión</button>
       </div>
