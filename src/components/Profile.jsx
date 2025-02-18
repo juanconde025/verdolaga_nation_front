@@ -20,10 +20,14 @@ function Profile() {
       }
 
       try {
-        const userData = await getUserProfile();  // No es necesario pasar el token aquí
+        // Obtener perfil del usuario autenticado
+        const userData = await getUserProfile();
+        console.log("Datos del usuario:", userData);
         setUser(userData);
 
-        const userPosts = await getUserPosts(userData.id);  // Aquí se pasa el userData.id
+        // Obtener publicaciones del usuario
+        const userPosts = await getUserPosts(userData.id);
+        console.log("Publicaciones del usuario:", userPosts);
         setPosts(userPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
       } catch (error) {
         setError("Error al cargar los datos. Inténtalo de nuevo.");
@@ -41,8 +45,8 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <h2>{user.username}</h2>
-      <p>{user.bio || "Sin biografía."}</p>
+      <h2>{user?.username}</h2>
+      <p>{user?.bio || "Sin biografía."}</p>
 
       <h3>Publicaciones</h3>
       {posts.length > 0 ? (
