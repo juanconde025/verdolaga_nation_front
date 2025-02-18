@@ -5,54 +5,55 @@
 
 # Verdolaga Nation - Frontend
 
-Este es el frontend de la aplicación **Verdolaga Nation**, una red social interactiva. El frontend está construido con **React** y configurado con **Vite** para un entorno de desarrollo rápido.
+This is the frontend for the Verdolaga Nation application, an interactive social network. The frontend is built with React and configured with Vite for a fast development environment.
 
 ---
 
-## Tabla de Contenidos
+## Table of Contents
 
-- [Requisitos Frontend](#requisitos-frontend)
-- [Instalación y Configuración Frontend](#instalacion-y-configuracion-frontend)
-- [Scripts de Desarrollo](#scripts-de-desarrollo-frontend)
-
----
-
-## Requisitos Frontend
-
-- **Node.js** (14.x o superior)
-- **npm** (v7 o superior)
+- [Frontend Requirements](#requisitos-frontend)
+- [Frontend Installation and Configuration](#instalacion-y-configuracion-frontend)
+- [Development Scripts](#scripts-de-desarrollo-frontend)
 
 ---
 
-## Instalación y Configuración Frontend
+## Frontend Requirements
 
-1. **Clonar el repositorio**:
+- **Node.js** (14.x or higher)
+- **npm** (v7 or higher)
+
+---
+
+## Frontend Installation and Configuration
+
+1. **Clone the repository**:
    ```bash
    git clone https://github.com/usuario/verdolaga-nation-frontend.git
    cd verdolaga-nation-frontend
    ```
-2. **Instalar dependencias:**
-Asegúrate de tener npm instalado en tu máquina. Luego ejecuta:
+2. **Install dependencies:**
+
+Ensure you have npm installed on your machine. Then run:
 
 ```bash
 npm install
 ```
-3. **Configurar las variables de entorno:**
+3. **Configure environment variables:**
 
-Si necesitas configurar alguna variable de entorno (como la URL del backend o las claves API), crea un archivo .env en la raíz de tu proyecto y agrega las variables necesarias:
+If you need to configure any environment variables (such as the backend URL or API keys), create a .env file in the root of your project and add the necessary variables:
 
 ```env
 VITE_BACKEND_URL=http://localhost:8080
 ```
-4. **Iniciar el servidor de desarrollo con Vite:**
-Ejecuta el siguiente comando para iniciar el servidor de desarrollo:
+4. **Start the Vite development server:**
+Run the following command to start the development server:
 
 ```bash
 npm run dev
 ```
-El frontend se iniciará en http://localhost:3000.
+The frontend will start at http://localhost:5172.
 
-5. **Scripts de Desarrollo**
+5. **Development Scripts**
 ```yaml
 npm run dev: Inicia el servidor de desarrollo de React (Vite).
 npm run build: Construye la aplicación para producción.
