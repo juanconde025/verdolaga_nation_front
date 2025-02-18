@@ -19,12 +19,11 @@ function Post() {
     setLoading(true);
     setError("");
     
-    // Obtener el userId de las cookies
     const userId = Cookies.get('userId'); 
 
-    // Si no hay un userId, no podemos crear el post
     if (!userId) {
       setError("No se pudo obtener el ID del usuario.");
+      console.log(Cookies.get);
       setLoading(false);
       return;
     }

@@ -17,11 +17,16 @@ function Login() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    
+
 
     try {
       const response = await loginUser(credentials);
-      alert(`Bienvenido, ${response.username}!`);
+      console.log(response);
+      alert(`Bienvenido, ${response.username}!`)
       Cookies.set("token", response.token, { expires: 1});
+      Cookies.set("userId", response.userId, { expires: 1});
+      Cookies.set("username", response.username, { expires: 1});
       navigate("/home");
     } catch (err) {
       setError("Error al iniciar sesión. Verifica tus credenciales.");

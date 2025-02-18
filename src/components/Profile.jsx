@@ -45,16 +45,23 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <h2>{user?.username}</h2>
-      <p>{user?.bio || "Sin biografía."}</p>
+      {/* Verifica si el usuario existe antes de mostrar */}
+      {user ? (
+        <>
+          <h2>{user.username}</h2>
+          <p>{user.bio || "Sin biografía."}</p>
 
-      <h3>Publicaciones</h3>
-      {posts.length > 0 ? (
-        <ul className="post-list">
-          {posts.map((post) => <Post key={post.id} post={post} />)}
-        </ul>
+          <h3>Publicaciones</h3>
+          {posts.length > 0 ? (
+            <ul className="post-list">
+              {posts.map((post) => <Post key={post.id} post={post} />)}
+            </ul>
+          ) : (
+            <p>No hay publicaciones aún.</p>
+          )}
+        </>
       ) : (
-        <p>No hay publicaciones aún.</p>
+        <p>Esperando los datos del usuario...</p>
       )}
     </div>
   );
