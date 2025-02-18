@@ -51,7 +51,7 @@ Run the following command to start the development server:
 ```bash
 npm run dev
 ```
-The frontend will start at http://localhost:5172.
+The frontend will start at http://localhost:5173.
 
 5. **Development Scripts**
 ```yaml
