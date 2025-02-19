@@ -22,7 +22,8 @@ function Home() {
 
     const fetchPosts = async () => {
       try {
-        const feedPosts = await getFeedPosts(); // Obtener todas las publicaciones sin filtrar por userId
+        const feedPosts = await getFeedPosts();
+        console.log("Publicaciones obtenidas:", feedPosts);
         setPosts(feedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
       } catch (error) {
         console.error("Error cargando las publicaciones", error);
@@ -35,18 +36,39 @@ function Home() {
   return (
     <div className="home-container">
       <h2>Feed</h2>
-      {username && <p>Bienvenido, {username}!</p>}
+      {username && <p>Bienvenid@, {username}!</p>}
 
       {posts.length > 0 ? (
         <ul className="post-list">
-          {posts.map((post) => (
-            <li key={post.id} className="post-item">
-              <h4>{post.title}</h4>
-              <p>{post.description}</p>
-              {post.imageUrl && <img src={post.imageUrl} alt="Imagen del post" className="post-image" />}
-              <small>Publicado el {new Date(post.createdAt).toLocaleString()}</small>
-            </li>
-          ))}
+          {posts.map((post) => {
+            const imageUrl = post.imageUrl?.startsWith("http")
+              ? post.imageUrl
+              : `http://localhost:8080/uploads/${post.imageUrl}`;
+
+            return (
+              <li key={post.id} className="post-item">
+                <h4>{post.title || "Sin título"}</h4>
+                <p>{post.description || "Sin descripción"}</p>
+                {post.imageUrl && (
+                  <img
+                    src={imageUrl}
+                    alt="Imagen del post"
+                    className="post-image"
+                    onError={(e) => {
+                      e.target.style.display = "none";
+                      console.error("Error cargando la imagen:", imageUrl);
+                    }}
+                  />
+                )}
+                <small>
+                  Publicado el:{" "}
+                  {post.createdAt
+                    ? new Date(post.createdAt).toLocaleString()
+                    : "Fecha desconocida"}
+                </small>
+              </li>
+            );
+          })}
         </ul>
       ) : (
         <p>No hay publicaciones aún.</p>

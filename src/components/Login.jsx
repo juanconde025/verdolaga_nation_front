@@ -23,7 +23,7 @@ function Login() {
     try {
       const response = await loginUser(credentials);
       console.log(response);
-      alert(`Bienvenido, ${response.username}!`)
+      alert(`Bienvenid@, ${response.username}!`)
       Cookies.set("token", response.token, { expires: 1});
       Cookies.set("userId", response.userId, { expires: 1});
       Cookies.set("username", response.username, { expires: 1});

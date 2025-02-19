@@ -293,7 +293,7 @@ button:disabled {
   border-radius: 10px;
   background-color: #FFFFFF;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
+  margin-top: 500px;
 }
 
 .profile-container .avatar {
@@ -380,3 +380,74 @@ button.dark-mode:hover {
   background-color: #1A8C3F; /* Verde oscuro */
 }
 
+/* Contenedor principal para evitar desbordamientos */
+.home-container, .profile-container {
+  max-width: 800px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* Lista de posts */
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* Cada post */
+.post-item {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Evita que el contenido se salga */
+}
+
+/* Imágenes dentro del post */
+.post-image {
+  max-width: 100%; /* Para que no se desborde */
+  height: auto;
+  display: block;
+  margin: 10px auto; /* Centrar imagen */
+  border-radius: 8px;
+}
+
+/* Navbar fijo y sin desbordamiento */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 10px;
+  z-index: 1000; /* Para que siempre esté arriba */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor general con scroll si se necesita */
+body {
+  overflow-y: auto; /* Permitir scroll si hay mucho contenido */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Asegurar que el contenido no quede oculto detrás del navbar */
+.content {
+   /* Ajusta este valor según la altura del navbar */
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4caf50;
+}

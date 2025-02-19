@@ -38,9 +38,11 @@ function Profile() {
           return;
         }
 
+        console.log("Usuario encontrado:", currentUser);
         setUser(currentUser);
 
         const userPosts = await getUserPosts(currentUser.id);
+        console.log("Publicaciones del usuario:", userPosts);
         setPosts(userPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
       } catch (error) {
         setError("Error al cargar los datos.");
@@ -56,10 +58,25 @@ function Profile() {
   if (loading) return <p>Cargando perfil...</p>;
   if (error) return <p>{error}</p>;
 
+  // Construcción de la URL de la imagen de perfil
+  const profileImageUrl = user?.imageUrl?.startsWith("http")
+    ? user.imageUrl
+    : `http://localhost:8080/uploads/${user?.imageUrl}`;
+
+  console.log("Imagen de perfil:", profileImageUrl); // 🔍 Verificar en la consola
+
   return (
     <div className="profile-container">
       {user ? (
         <>
+          {/* Imagen de perfil */}
+          <img
+            src={profileImageUrl}
+            alt="Foto de perfil"
+            className="profile-image"
+            onError={(e) => (e.target.src = "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg")}
+          />
+
           <h2>{user.username}</h2>
           <p>{user.bio || "Sin biografía."}</p>
 
